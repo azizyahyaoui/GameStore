@@ -32,7 +32,7 @@ class Router
     public function resolve()
     {
        $path=$this->request->getPath();
-       $method = $this->request->getMethod();
+       $method = $this->request->reqMethod();
        $callBack=$this->route[$method][$path] ?? false;
        if($callBack === false){
           $this->response->setStatusCode(404);
@@ -43,7 +43,8 @@ class Router
            return $this->renderView($callBack);
        }
        if (is_array( $callBack)) {
-        $callBack[0]= new $callBack[0]();
+        AppStore::$app->coreMainController = new $callBack[0]();
+	       $callBack[0] = AppStore::$app->coreMainController;
        }
      
         return call_user_func($callBack, $this->request);
@@ -59,8 +60,9 @@ class Router
 
     protected function layoutContent()
     {
+		$layout =AppStore::$app->coreMainController->layout;
         ob_start();
-        include_once AppStore::$ROOT_DIR."/views/layout/_main_layout.php";
+        include_once AppStore::$ROOT_DIR."/views/layout/$layout.php";
         return ob_get_clean();
     }
 

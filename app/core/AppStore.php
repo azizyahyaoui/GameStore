@@ -6,6 +6,7 @@ class AppStore
 {
     public static string $ROOT_DIR;
     public static AppStore $app;
+	public CoreMainController $coreMainController;
     public Request $request;
     public Router $router;
     public  Response $response;
@@ -19,6 +20,16 @@ class AppStore
         $this->router = new Router($this->request,$this->response);
 
     }
+
+	public function getCoreMainController(): CoreMainController
+	{
+		return $this->coreMainController;
+	}
+	public function setCoreMainController(CoreMainController $coreMainController): void
+	{
+		$this->coreMainController = $coreMainController;
+	}
+
 
     public function run()
     {
