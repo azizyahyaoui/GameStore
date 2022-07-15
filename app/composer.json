@@ -11,5 +11,7 @@
             "App\\": "./"
         }
     },
-    "require": {}
+    "require": {
+      "ext-cassandra": "*"
+    }
 }

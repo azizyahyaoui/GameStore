@@ -14,20 +14,31 @@ class Request
         return substr($path, 0, $position);
     }
 
-    public function getMethod(): string
+
+    public function reqMethod(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+	public function isGet()
+	{
+		return $this->reqMethod() === 'get';
+	}
+
+	public function isPost()
+	{
+		return $this->reqMethod() === 'post';
+	}
+
      public function getBodyAction(): array
      {
         $bodyAction= [];
-        if ($this->getMethod()==='get') {
+        if ($this->reqMethod()==='get') {
             foreach($_GET as $key => $value){
 	            $bodyAction[$key]=filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
-        if ($this->getMethod()==='post') {
+        if ($this->reqMethod()==='post') {
             foreach($_POST as $key => $value){
                 $bodyAction[$key]=filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
