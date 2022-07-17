@@ -19,23 +19,23 @@ class AuthController extends CoreMainController
 
 	public function register(Request $request)
 	{
-		$errors=[];
+		$errors = [];
 		$this->setLayout("_auth_layout");
 		$registerModel = new RegisterModel();
-		echo "<pre>";
-		var_dump($registerModel);
-		echo "</pre>";
-		exit;
+
 		if ($request->isPost()) {
 
 			$registerModel->loadData($request->getBodyAction());
 
-			if($registerModel->validateData() && $registerModel->register())
-			{
-				return 'Success';
+			if ($registerModel->validateData() && $registerModel->register()) {
+				return "Success";
 			}
-			return $this->render('register', ['model'=> $registerModel]);
+			echo "<pre>";
+			var_dump($registerModel->errors);
+			echo "</pre>";
+			exit;
+			return $this->render('register', ['model' => $registerModel]);
 		}
-		return $this->render('register' , [ 'errors' => $errors]);
+		return $this->render('register', ['errors' => $errors]);
 	}
 }
