@@ -3,17 +3,17 @@
 namespace App\models;
 
 use App\core\CoreMainModel;
-use Cassandra\Date;
+//use App\helpers\DataRules;
 
 class RegisterModel extends CoreMainModel
 {
-	private string $firstName ;
-	private string $lastName;
-	private Date $birthDate;
-	private string $email ;
-	private int $tel;
-	private string $password;
-	private string $confirmPassword ;
+	public string $firstName;
+	public string $lastName;
+	//public Date $birthDate;
+	public string $email;
+	public string $tel;
+	public string $password;
+	public string $confirmPassword;
 
 
 	public function getFirstName(): string
@@ -36,15 +36,15 @@ class RegisterModel extends CoreMainModel
 		$this->lastName = $lastName;
 	}
 
-	public function getBirthDate(): Date
-	{
-		return $this->birthDate;
-	}
-
-	public function setBirthDate(Date $birthDate): void
-	{
-		$this->birthDate = $birthDate;
-	}
+	//	public function getBirthDate(): Date
+	//	{
+	//		return $this->birthDate;
+	//	}
+	//
+	//	public function setBirthDate(Date $birthDate): void
+	//	{
+	//		$this->birthDate = $birthDate;
+	//	}
 
 	public function getEmail(): string
 	{
@@ -92,4 +92,14 @@ class RegisterModel extends CoreMainModel
 	}
 
 
+	public function rules(): array
+	{
+		return [
+			'firstName' => [self::RULE_REQUIRED],
+			'lastName' => [self::RULE_REQUIRED],
+			'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
+			'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8]],
+			'$confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
+		];
+	}
 }
