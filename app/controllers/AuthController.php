@@ -30,12 +30,13 @@ class AuthController extends CoreMainController
 			if ($registerModel->validateData() && $registerModel->register()) {
 				return "Success";
 			}
-			echo "<pre>";
-			var_dump($registerModel->errors);
-			echo "</pre>";
-			exit;
-			return $this->render('register', ['model' => $registerModel]);
+
+
+			return $this->render('register', [
+				'model' => $registerModel,
+			]);
 		}
 		return $this->render('register', ['errors' => $errors]);
 	}
+
 }
