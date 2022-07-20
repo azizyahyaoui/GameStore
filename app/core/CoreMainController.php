@@ -2,6 +2,7 @@
 
 namespace App\core;
 
+
 class CoreMainController
 {
 	public string $layout ="_main_layout";
@@ -11,9 +12,10 @@ class CoreMainController
 
 	}
 
-	public function render($view)
+	public function render($view, $params=[])
 	{
-		return AppStore::$app->router->renderView($view);
+		return AppStore::$app->router->renderView($view, $params);
 	}
+
 
 }

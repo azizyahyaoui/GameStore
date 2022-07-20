@@ -10,7 +10,7 @@ class AppMainController extends CoreMainController
 {
 	public function home()
 	{
-        return $this->render('home');
+        return $this->render('home', $params);
 	}
     public function contact()
     {

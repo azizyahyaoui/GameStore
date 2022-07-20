@@ -7,13 +7,13 @@ use App\core\CoreMainModel;
 
 class RegisterModel extends CoreMainModel
 {
-	public string $firstName;
-	public string $lastName;
-	//public Date $birthDate;
-	public string $email;
-	public string $tel;
-	public string $password;
-	public string $confirmPassword;
+	public string $firstName ='';
+	public string $lastName='';
+	//public Date $birthDate='';
+	public string $email='';
+	public string $tel='';
+	public string $password='';
+	public string $confirmPassword='';
 
 
 	public function getFirstName(): string
@@ -86,9 +86,9 @@ class RegisterModel extends CoreMainModel
 		$this->confirmPassword = $confirmPassword;
 	}
 
-	public function register()
+	public function register(): string
 	{
-		echo "create new user";
+		return "create new user";
 	}
 
 
@@ -99,7 +99,7 @@ class RegisterModel extends CoreMainModel
 			'lastName' => [self::RULE_REQUIRED],
 			'email' => [self::RULE_REQUIRED, self::RULE_EMAIL],
 			'password' => [self::RULE_REQUIRED, [self::RULE_MIN, 'min' => 8]],
-			'$confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
+			'confirmPassword' => [self::RULE_REQUIRED, [self::RULE_MATCH, 'match' => 'password']]
 		];
 	}
 }

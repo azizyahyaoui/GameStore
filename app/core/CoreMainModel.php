@@ -19,7 +19,7 @@ abstract class CoreMainModel
 
 
 
-	public function loadData($data)
+	public function loadData($data): void
 	{
 		foreach ($data as $key => $value) {
 			if (property_exists($this, $key)) {
@@ -30,7 +30,7 @@ abstract class CoreMainModel
 
 
 
-	public function validateData()
+	public function validateData(): bool
 	{
 		foreach ($this->rules() as $attribute => $rules) {
 			$value = $this->{$attribute};
@@ -57,7 +57,7 @@ abstract class CoreMainModel
 		return empty($this->errors);
 	}
 
-	public function addError(string $attribute, string $rule, $params = [])
+	public function addError(string $attribute, string $rule, $params = []): void
 	{
 		$message = $this->errorMessages()[$rule] ?? '';
 		foreach ($params as $key => $value) {
@@ -75,5 +75,15 @@ abstract class CoreMainModel
 			self::RULE_MATCH => 'This Filed must be the same as {match}',
 
 		];
+	}
+
+	public function hasError(string $attribute)
+	{
+		return $this->errors[$attribute] ?? false ;
+	}
+
+	public function getFieldError(string $attribute)
+	{
+		return $this->errors[$attribute][0] ?? false ;
 	}
 }

@@ -51,10 +51,10 @@ class Router
 
     }
 
-    public function renderView($view)
+    public function renderView($view, $params=[])
     {
         $layoutContent=$this->layoutContent();
-        $viewContent=$this->renderInContentView($view);
+        $viewContent=$this->renderInContentView($view,$params);
         return str_replace('{{content}}',  $viewContent,$layoutContent);
     }
 
@@ -66,8 +66,11 @@ class Router
         return ob_get_clean();
     }
 
-    protected function renderInContentView($view)
+    protected function renderInContentView($view, $params)
     {
+		foreach ($params as $key => $value){
+			$$key =$value;
+		}
         ob_start();
         include_once AppStore::$ROOT_DIR."/views/$view.php";
         return ob_get_clean();
