@@ -16,10 +16,10 @@ $from= Form::formBegin('#','post');
         </div>
     </div>
 
-<?php echo $from->creatField($model,'email');?>
-<?php echo $from->creatField($model,'tel');?>
-<?php echo $from->creatField($model,'password');?>
-<?php echo $from->creatField($model,'confirmPassword'); ?>
+<?php echo $from->creatField($model,'email')->emailField();?>
+<?php echo $from->creatField($model,'tel')->numberField();?>
+<?php echo $from->creatField($model,'password')->passwordField();?>
+<?php echo $from->creatField($model,'confirmPassword')->passwordField(); ?>
 
 <br>
 <button type="submit" class="btn btn-primary">Submit</button>
