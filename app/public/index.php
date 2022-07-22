@@ -1,12 +1,25 @@
 <?php
-require_once __DIR__ . "/../vendor/autoload.php";
-
 use App\controllers\AppMainController;
 use App\controllers\AuthController;
 use App\core\AppStore;
 
+require_once __DIR__ . "/../vendor/autoload.php";
 
-$store = new AppStore(dirname(__DIR__));
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+
+
+$dbConfig =[
+	'db' => [
+		'dsn' => $_ENV['DB_DSN'],
+		'user' => $_ENV['DB_USER'],
+		'password' => $_ENV['DB_PASSWORD'],
+	]
+];
+
+
+$store = new AppStore(dirname(__DIR__),$dbConfig);
 
 $store->router->get('/', [AppMainController::class, 'home']);
 $store->router->get('/index', [AppMainController::class, 'home']);

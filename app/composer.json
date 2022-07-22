@@ -12,6 +12,7 @@
         }
     },
     "require": {
-      "ext-cassandra": "*"
+        "vlucas/phpdotenv": "^5.4",
+      "ext-pdo": "*"
     }
 }
