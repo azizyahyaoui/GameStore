@@ -192,8 +192,7 @@ func main(){
 }
 ```
 
-> ### <b style="color:yellow" > Warning : </b>
->
+> **Warning** :
 > - You can not allow to declare same var twice in the same Scope .<br>
 > - If you declare a Vars must be used otherwise that make an error .
 
