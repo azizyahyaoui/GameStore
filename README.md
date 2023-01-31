@@ -264,5 +264,3 @@ func main(){
 >THis is a Note
 
 >**Check**
-> It's OK
-
